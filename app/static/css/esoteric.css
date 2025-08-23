@@ -278,16 +278,13 @@ body {
 
     /* CAMBIOS PARA RESPONSIVE PRUEBA */
     body {
-      /* Cambiar a scroll para mejor rendimiento en móvil */
-      background-attachment: scroll;
-      background-size: cover;
+      /*background-attachment: scroll; /* ← Mejor rendimiento */
+      background-size: cover; /* ← Mantener cobertura completa */
       background-position: center center;
+      background-repeat: no-repeat;
       
-      /* Fallback con gradiente si la imagen no carga bien */
+      /* SIN gradientes - solo color de respaldo si no carga */
       background-color: #1a0d2e;
-      background-image: 
-        linear-gradient(135deg, rgba(139, 0, 0, 0.2), rgba(179, 0, 27, 0.2)),
-        url('/static/images/background.jpg');
     }
 
     .bg-video {
@@ -340,7 +337,7 @@ body {
     }
 
     #tarot::before {
-      background-attachment: scroll;
+      /*background-attachment: scroll;
       background-size: cover;
       background-position: center 30%; /* ← Enfocar parte importante */
       filter: brightness(0.3) contrast(1.2); /* ← Más contraste en móvil */
@@ -362,7 +359,7 @@ body {
     }
 
     .info-section::before {
-      background-attachment: scroll;
+    /*  background-attachment: scroll; */
       background-size: cover;
       background-position: center center;
       filter: brightness(0.35) contrast(1.1); /* ← Mejor visibilidad en móvil */
@@ -393,12 +390,6 @@ body {
   }
 
   @media (max-width: 480px) {
-
-    body,
-    #tarot::before,
-    .info-section::before {
-      background-attachment: scroll !important;
-    }
 
     .amarres-content {
       padding: 2rem 0.5rem;
