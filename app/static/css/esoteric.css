@@ -270,6 +270,14 @@ body {
     }
   }
 
+  /* Fix específico para iPhone (detección por user agent CSS) */
+  @supports (-webkit-touch-callout: none) {
+    body {
+      background-attachment: scroll !important;
+      -webkit-background-size: cover !important;
+    }
+  }
+
   @media (max-width: 768px) {
     
     :root {
@@ -278,11 +286,14 @@ body {
 
     /* CAMBIOS PARA RESPONSIVE PRUEBA */
     body {
-      /*background-attachment: scroll; /* ← Mejor rendimiento */
+      /* background-attachment: scroll; */
       background-size: cover; /* ← Mantener cobertura completa */
-      background-position: center center;
+      background-position: center top;
       background-repeat: no-repeat;
-      background: url('/static/images/background.jpg') center/cover no-repeat;
+      
+
+      -webkit-background-size: cover;
+      transform: translateZ(0); /* ← Activar aceleración GPU */
       
       /* SIN gradientes - solo color de respaldo si no carga */
       background-color: #1a0d2e;
@@ -400,6 +411,10 @@ body {
       
       /* SIN gradientes - solo color de respaldo si no carga */
       background-color: #1a0d2e;
+
+      /* Propiedades específicas para iOS Safari */
+      -webkit-background-size: cover;
+      -webkit-transform: translateZ(0);
     }
 
     .amarres-content {
