@@ -391,6 +391,16 @@ body {
 
   @media (max-width: 480px) {
 
+    body {
+      /*background-attachment: scroll; /* ← Mejor rendimiento */
+      background-size: cover; /* ← Mantener cobertura completa */
+      background-position: center center;
+      background-repeat: no-repeat;
+      
+      /* SIN gradientes - solo color de respaldo si no carga */
+      background-color: #1a0d2e;
+    }
+
     .amarres-content {
       padding: 2rem 0.5rem;
     }
