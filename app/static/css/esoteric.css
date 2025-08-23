@@ -271,6 +271,7 @@ body {
   }
 
   @media (max-width: 768px) {
+    
     :root {
       --section-spacing: 2rem; /* ← Reducir espaciado en móvil */
     }
@@ -287,6 +288,31 @@ body {
       background-image: 
         linear-gradient(135deg, rgba(139, 0, 0, 0.2), rgba(179, 0, 27, 0.2)),
         url('/static/images/background.jpg');
+    }
+
+    .bg-video {
+      /* MANTENER el video pero optimizado para móvil */
+      position: absolute; /* ← Cambiar de fixed a absolute */
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background-color: #000;
+      
+      /* Mejorar rendimiento en móvil */
+      will-change: auto;
+      transform: translate(-50%, -50%) scale(1.1); /* ← Escalar ligeramente */
+
+    #amarres {
+      min-height: 100vh;
+    }
+    
+    .amarres-content {
+      padding: 3rem 1rem;
+    }
+    
+    /* Overlay más oscuro en móvil para mejor legibilidad */
+    #amarres::after {
+      background: rgba(0, 0, 0, 0.6); /* ← Más oscuro que desktop */
     }
 
     .tarot-btn {
@@ -364,6 +390,7 @@ body {
       margin: 0 0.5rem !important;
     }
   }
+  }
 
   @media (max-width: 480px) {
 
@@ -371,6 +398,17 @@ body {
     #tarot::before,
     .info-section::before {
       background-attachment: scroll !important;
+    }
+
+    .amarres-content {
+      padding: 2rem 0.5rem;
+    }
+    
+    /* Si el video causa problemas de rendimiento, usar imagen de poster */
+    .bg-video {
+      background-image: url('/static/images/video-poster.jpg'); /* ← Crear esta imagen */
+      background-size: cover;
+      background-position: center;
     }
     
     /* Mejorar contraste en pantallas pequeñas */
@@ -396,24 +434,68 @@ body {
       padding: 1.5rem 1rem !important;
       border-radius: var(--border-radius-md) !important;
     }
+
+    .tarot-btn {
+      position: static;
+      transform: none;
+      margin: 1rem auto 2rem auto;
+      display: block;
+      max-width: 250px;
+    }
   }
 
   /* ========== AMARRES ========= */
-  #amarres{overflow:hidden;}
-  .bg-video{
-    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
+  #amarres {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  #amarres::after{content:"";position:absolute;inset:0;background:var(--overlay-bg);z-index:-1;}
-  .amarres-content{max-width:90ch;z-index:1;}
-  .amarres-content h2{
-    font-size:clamp(2rem,6vw,4.9rem);
-    color:var(--crimson);text-transform:uppercase;margin-bottom:1rem;letter-spacing:.05em;
+  .bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -2;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    background-color: #000; /* ← Fallback mientras carga */
   }
-  .amarres-content p{
-    font-size:clamp(1rem,2.5vw,2.9rem);
-    font-weight:300;line-height:1.45;
+
+  #amarres::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--overlay-bg);
+    z-index: -1;
   }
-  @media(max-width:768px){.bg-video{display:none;}#amarres{background:#000;}}
+  
+  .amarres-content {
+    max-width: 90ch;
+    z-index: 1;
+    position: relative;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  .amarres-content h2 {
+    font-size: clamp(2rem, 6vw, 4.9rem);
+    color: var(--crimson);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .amarres-content p {
+    font-size: clamp(1rem, 2.5vw, 2.9rem);
+    font-weight: 300;
+    line-height: 1.45;
+  }
 
   /* ===== SECCIÓN "TAROT" ===== */
   #tarot::before{
