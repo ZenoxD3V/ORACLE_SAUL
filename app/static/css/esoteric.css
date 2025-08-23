@@ -282,7 +282,7 @@ body {
       background-size: cover; /* ← Mantener cobertura completa */
       background-position: center center;
       background-repeat: no-repeat;
-      background: url('/static/images/background.jpg') center/cover fixed no-repeat;
+      background: url('/static/images/background.jpg') center/cover no-repeat;
       
       /* SIN gradientes - solo color de respaldo si no carga */
       background-color: #1a0d2e;
