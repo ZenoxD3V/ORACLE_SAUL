@@ -3,7 +3,7 @@ services:
     name: esoteric-web
     runtime: python3
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
+    startCommand: gunicorn wsgi:app
     plan: free
     branch: main
     envVars:
