@@ -197,20 +197,37 @@ body {
     line-height: 1.6;
   }
   
-  .gallery{
-    display:flex;
-    flex-wrap:wrap;
-    gap:1rem;
-    justify-content:center;
-    margin-top:1rem;
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
   }
   
-  .gallery img{
-    width:20%;
-    max-width:300px;
-    flex:1 1 100px;
-    border-radius:8px;
-    object-fit:cover;
+  .gallery img {
+    width: 20%;
+    max-width: 300px;
+    flex: 1 1 100px;
+    border-radius: var(--border-radius-sm);
+    object-fit: cover;
+    height: 200px; /* ← Altura fija para consistencia */
+    
+    /* Optimización para calidad */
+    image-rendering: -webkit-optimize-contrast; /* Safari */
+    image-rendering: crisp-edges; /* Para imágenes pixeladas */
+    image-rendering: auto; /* Fallback */
+    
+    /* Transición suave */
+    transition: var(--transition-normal);
+    
+    /* Mejorar compresión */
+    filter: contrast(1.05) saturate(1.1);
+  }
+
+  .gallery img:hover {
+    transform: scale(1.02);
+    box-shadow: var(--box-shadow-light);
   }
 
   /* Botón tarot MEJORADO - responsive */
@@ -267,6 +284,38 @@ body {
     :root {
       --section-spacing: 2rem; /* ← Reducir espaciado en móvil */
     }
+
+    /* CAMBIOS PARA RESPONSIVE PRUEBA */
+    body {
+      /* Cambiar a scroll para mejor rendimiento en móvil */
+      background-attachment: scroll;
+      background-size: cover;
+      background-position: center center;
+      
+      /* Fallback con gradiente si la imagen no carga */
+      background-color: #1a0d2e;
+      background-image: 
+        linear-gradient(135deg, rgba(139, 0, 0, 0.3), rgba(179, 0, 27, 0.3)),
+        url('/static/images/background.jpg');
+    }
+
+    .gallery {
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .gallery img {
+      width: 28%;
+      height: 150px; /* ← Altura más pequeña en móvil */
+      max-width: 200px;
+      border-radius: var(--border-radius-sm);
+      
+      /* Optimización específica para móvil */
+      image-rendering: auto;
+      filter: contrast(1.02) saturate(1.05) brightness(1.02);
+    }
+    
+    /* FIN CAMBIOS PRUEBA */
     
     .urgent-banner {
       font-size: 0.8rem;
@@ -305,6 +354,12 @@ body {
   }
 
   @media (max-width: 480px) {
+
+    .gallery img {
+      width: 45%;
+      height: 120px; /* ← Aún más pequeña en pantallas muy pequeñas */
+      max-width: 180px;
+    }
     .info-section {
       padding: 1.5rem 0.5rem;
     }
