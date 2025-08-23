@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  {% block seo_meta %}
+  <title>🔮 Maestro Saúl de la Cruz | Amarres de Amor Efectivos | Tarot Gratis ✨</title>
+  <meta name="description" content="⭐ Maestro Saúl de la Cruz - 25+ años de experiencia en amarres de amor, limpiezas espirituales y tarot. CONSULTA GRATIS por WhatsApp." />
+  <meta name="keywords" content="amarres de amor, maestro espiritual, tarot gratis, magia blanca, brujo efectivo, vidente, lectura manos, limpiezas espirituales" />
+  {% endblock %}
+  
+  <meta name="author" content="Maestro Saúl de la Cruz" />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="🔮 Maestro Saúl de la Cruz | Amarres de Amor Efectivos | Consulta Gratis" />
+  <meta property="og:description" content="⭐ 25+ años ayudando en amarres de amor y trabajo espiritual. CONSULTA GRATIS." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_ES" />
+  
+  {% include 'components/schema_org.html' %}
+  
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700;800&display=swap" rel="stylesheet"/>
+  
+  <!-- Preload critical images -->
+  <link rel="preload" as="image" href="{{ url_for('static', filename='images/background.jpg') }}">
+  
+  <!-- CSS Principal -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/esoteric.css') }}">
+  
+  {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+  {% include 'components/urgent_banner.html' %}
+  {% include 'components/whatsapp_float.html' %}
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include 'components/tracking_scripts.html' %}
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

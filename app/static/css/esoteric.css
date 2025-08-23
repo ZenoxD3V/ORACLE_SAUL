@@ -1,0 +1,758 @@
+/* ========== VARIABLES ========= */
+  :root {
+  --crimson: #b3001b;
+  --white: #ffffff;
+  --overlay-bg: rgba(0,0,0,.45);
+  --btn-bg: rgba(255,255,255,.15);
+  --btn-bg-hover: rgba(255,255,255,.30);
+  --gold: #FFD700;
+  --dark-red: #8B0000;
+  --light-gold: #FFF8DC;
+  --section-spacing: 4rem; /* ← Nueva variable para espaciado consistente */
+  --border-radius-sm: 8px;
+  --border-radius-md: 15px;
+  --border-radius-lg: 20px;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --box-shadow-light: 0 4px 12px rgba(0,0,0,0.1);
+  --box-shadow-heavy: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+  /* ========== RESET / BASE ========= */
+  *, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  color: var(--white);
+  background: url('/static/images/background.jpg') center/cover fixed no-repeat;
+  line-height: 1.6;
+  overflow-x: hidden; /* ← Prevenir scroll horizontal */
+}
+
+/* Optimización de fuentes */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+  h1,h2{margin:0;text-align:center;}
+
+  /* ========== BOTONES WHATSAPP CTA - PALETA COHERENTE ========= */
+  .whatsapp-btn {
+    display: inline-block;
+    background: linear-gradient(45deg, var(--dark-red), var(--crimson));
+    color: var(--white);
+    padding: 15px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: var(--box-shadow-heavy);
+    transition: var(--transition-normal);
+    border: 2px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+    font-size: 0.9rem;
+    will-change: transform; /* ← Optimización GPU */
+  }
+
+  .whatsapp-btn::before {
+    content: '📱';
+    margin-right: 8px;
+    font-size: 1.1em;
+  }
+
+  .whatsapp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(139, 0, 0, 0.6);
+    background: linear-gradient(45deg, var(--crimson), var(--dark-red));
+  }
+
+  @keyframes gentlePulse {
+    0% { box-shadow:0 8px 25px rgba(139, 0, 0, 0.4), 0 0 0 0 rgba(255, 215, 0, 0.7); }
+    70% { box-shadow:0 8px 25px rgba(139, 0, 0, 0.4), 0 0 0 8px rgba(255, 215, 0, 0); }
+    100% { box-shadow:0 8px 25px rgba(139, 0, 0, 0.4), 0 0 0 0 rgba(255, 215, 0, 0); }
+  }
+
+  /* Botón flotante WhatsApp */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: linear-gradient(45deg, var(--dark-red), var(--crimson));
+    color: var(--white);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    text-decoration: none;
+    box-shadow: var(--box-shadow-heavy);
+    z-index: 1000;
+    border: 3px solid var(--gold);
+    transition: var(--transition-normal);
+    will-change: transform;
+  }
+
+  @keyframes subtleBounce {
+    0%, 20%, 50%, 80%, 100% { transform:translateY(0); }
+    40% { transform:translateY(-8px); }
+    60% { transform:translateY(-4px); }
+  }
+
+  .whatsapp-urgent{
+    background:linear-gradient(45deg, var(--crimson), #FF4444);
+    animation:urgentGlow 2s infinite alternate;
+  }
+
+  @keyframes urgentGlow {
+    from { 
+      transform:scale(1);
+      box-shadow:0 8px 25px rgba(139, 0, 0, 0.4), 0 0 20px var(--gold);
+    }
+    to { 
+      transform:scale(1.05);
+      box-shadow:0 12px 35px rgba(139, 0, 0, 0.6), 0 0 30px var(--gold);
+    }
+  }
+
+  /* CTA Containers */
+  .cta-container{
+    margin:2rem 0;
+    text-align:center;
+  }
+
+  .cta-text{
+    font-size:1.1rem;
+    color:var(--gold);
+    font-weight:bold;
+    margin-bottom:1rem;
+    text-transform:uppercase;
+    text-shadow:2px 2px 4px rgba(0,0,0,0.8);
+  }
+
+  /* ========== SECCIONES A PANTALLA COMPLETA EXACTA ========= */
+  .screen {
+  position: relative;
+  min-height: 100vh; /* ← Cambiar de height a min-height para flexibilidad */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--section-spacing) 1rem;
+  text-align: center;
+  margin-top: 0; /* ← Reset margin */
+  scroll-margin-top: 60px; /* ← Compensar banner fijo */
+}
+
+/* Primera sección ajustada para banner fijo */
+.screen:first-of-type {
+  padding-top: calc(var(--section-spacing) + 60px); /* ← Espacio para banner */
+}
+
+/* Espaciado entre secciones */
+.screen + .screen {
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* ← Separador sutil */
+}
+
+.hero {
+  position: relative;
+  z-index: 10;
+}
+
+  /* ========== HERO ========= */
+  .hero .content {
+    max-width: 70rem;
+    backdrop-filter: brightness(0.9);
+    position: relative;
+    z-index: 20;
+    padding: 2rem 0; /* ← Añadir padding interno */
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    color: var(--crimson);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 1.5rem 0; /* ← Ajustar margins */
+    line-height: 1.15;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+  }
+
+  .hero .description {
+    max-width: 60ch;
+    margin: 0 auto 2rem;
+    font-size: clamp(1rem, 2.5vw, 1.8rem);
+    font-weight: 600;
+    line-height: 1.6;
+  }
+  
+  .gallery{
+    display:flex;
+    flex-wrap:wrap;
+    gap:1rem;
+    justify-content:center;
+    margin-top:1rem;
+  }
+  
+  .gallery img{
+    width:20%;
+    max-width:300px;
+    flex:1 1 100px;
+    border-radius:8px;
+    object-fit:cover;
+  }
+
+  /* Botón tarot MEJORADO - responsive */
+  .tarot-btn {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0.75rem 1.25rem;
+    border: 2px solid var(--gold);
+    border-radius: 50px;
+    background: linear-gradient(45deg, var(--dark-red), var(--crimson));
+    color: var(--white);
+    font-weight: 800;
+    backdrop-filter: blur(4px);
+    text-decoration: none;
+    transition: var(--transition-normal);
+    text-transform: uppercase;
+    z-index: 25; /* ← Asegurar que esté por encima del banner */
+    font-size: 0.85rem;
+    line-height: 1.2;
+    will-change: transform;
+  }
+
+  .tarot-btn:hover {
+    background: linear-gradient(45deg, var(--crimson), var(--dark-red));
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    .tarot-btn {
+      position: static;
+      transform: none;
+      margin: 1rem auto 2rem auto;
+      display: block;
+      max-width: 250px;
+    }
+  }
+
+  /* RESPONSIVE MEJORADO */
+  @media (max-width: 1024px) {
+    .info-content {
+      max-width: 900px;
+      gap: 1.5rem;
+    }
+    
+    .info-box {
+      max-width: 450px;
+      padding: 2rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    :root {
+      --section-spacing: 2rem; /* ← Reducir espaciado en móvil */
+    }
+    
+    .urgent-banner {
+      font-size: 0.8rem;
+      padding: 10px 12px;
+    }
+    
+    .screen:first-of-type {
+      padding-top: calc(var(--section-spacing) + 50px);
+    }
+    
+    .info-section {
+      padding: var(--section-spacing) 1rem;
+    }
+    
+    .info-content {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .info-box {
+      max-width: 100%;
+    }
+    
+    .info-box p {
+      text-align: center;
+    }
+    
+    .centered-section {
+      padding: var(--section-spacing) 1rem;
+    }
+    
+    .centered-box {
+      padding: 2rem 1.5rem !important;
+      margin: 0 0.5rem !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .info-section {
+      padding: 1.5rem 0.5rem;
+    }
+    
+    .info-box {
+      padding: 1.5rem 1.25rem;
+    }
+    
+    .centered-box {
+      padding: 1.5rem 1rem !important;
+      border-radius: var(--border-radius-md) !important;
+    }
+  }
+
+  /* ========== AMARRES ========= */
+  #amarres{overflow:hidden;}
+  .bg-video{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
+  }
+  #amarres::after{content:"";position:absolute;inset:0;background:var(--overlay-bg);z-index:-1;}
+  .amarres-content{max-width:90ch;z-index:1;}
+  .amarres-content h2{
+    font-size:clamp(2rem,6vw,4.9rem);
+    color:var(--crimson);text-transform:uppercase;margin-bottom:1rem;letter-spacing:.05em;
+  }
+  .amarres-content p{
+    font-size:clamp(1rem,2.5vw,2.9rem);
+    font-weight:300;line-height:1.45;
+  }
+  @media(max-width:768px){.bg-video{display:none;}#amarres{background:#000;}}
+
+  /* ===== SECCIÓN "TAROT" ===== */
+  #tarot::before{
+    content:"";
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    background:url('static/images/tarot.jpeg') center/cover fixed no-repeat;
+    z-index:-2;
+  }
+
+  .info-content.tarot{
+    flex-direction: column;
+  }
+
+  /* ===== SECCIÓN "PROSPERIDAD" ===== */
+  .info-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--section-spacing) 2rem;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .info-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('/static/images/riqueza_bg.jpeg') center/cover no-repeat;
+    filter: brightness(0.4);
+    z-index: -1;
+  }
+
+  .info-content {
+    max-width: 1200px;
+    /*width: 100%;*/
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    z-index: 2;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .info-box {
+    background: rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius-md);
+    padding: 2.5rem 2rem;
+    flex: 1;
+    max-width: 100vh;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--box-shadow-heavy);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition-normal);
+  }
+
+  .info-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+  }
+
+  .info-box h2 {
+    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff4444;
+    font-size: clamp(1.7rem, 4vw, 3.2rem);
+    color: #FFF;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+
+  .info-box p {
+    font-size: clamp(1rem, 2.3vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.6;
+    color: #F0F0F0;
+    text-align: justify;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+  } 
+
+/* ========== TESTIMONIOS ========= */
+#testimonios{
+  padding: 2rem;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  height:100vh;
+}
+
+.testimonios-subtitle{
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: #FFD700;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.testimonios-garantia{
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  color: #FFF;
+  font-weight: 600;
+}
+
+.testimonios-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 1rem auto;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.testimonio{
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(139, 0, 0, 0.5);
+  border-radius: 15px;
+  padding: 1.5rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.testimonio::before{
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  font-size: 3rem;
+  color: var(--crimson);
+  font-weight: bold;
+}
+
+.testimonio-texto{
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  color: #F0F0F0;
+  text-align: left;
+}
+
+.testimonio-autor{
+  text-align: right;
+  border-top: 1px solid rgba(139, 0, 0, 0.3);
+  padding-top: 0.8rem;
+}
+
+.testimonio-nombre{
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #FFD700;
+  margin-bottom: 0.2rem;
+}
+
+.testimonio-ubicacion{
+  font-size: 0.85rem;
+  color: #CCC;
+  margin-bottom: 0.2rem;
+}
+
+.testimonio-fecha{
+  font-size: 0.75rem;
+  color: #999;
+  font-style: italic;
+}
+
+/* ========== POLÍTICAS ========= */
+#politicas{
+  padding: 4rem 2rem;
+}
+
+.politicas-box{
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid rgba(139, 0, 0, 0.6);
+  border-radius: 15px;
+  padding: 3rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.politicas-titulo{
+  font-size: 1.5rem;
+  color: #FFD700;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.whatsapp-link{
+  color: var(--gold);
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.whatsapp-link:hover{
+  color: var(--light-gold);
+}
+
+.politicas-texto{
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #F0F0F0;
+  text-align: justify;
+  font-style: italic;
+}
+
+/* ========== UBICACIÓN / MAPA ========= */
+#ubicacion{
+  padding: 4rem 2rem;
+}
+
+.ubicacion-content{
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.ubicacion-content h2{
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: var(--crimson);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 10px #ff0000;
+}
+
+.ubicacion-info{
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.ubicacion-direccion{
+  font-size: 1.5rem;
+  color: #FFD700;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.ubicacion-descripcion{
+  font-size: 1.2rem;
+  color: #F0F0F0;
+  line-height: 1.6;
+}
+
+.mapa-container{
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  border: 3px solid rgba(139, 0, 0, 0.6);
+}
+
+.mapa-container iframe{
+  width: 100%;
+  height: 450px;
+  border: none;
+  filter: contrast(1.2) saturate(1.1);
+}
+
+/* Urgent Banner con colores coherentes */
+.urgent-banner {
+  background: linear-gradient(45deg, var(--dark-red), var(--crimson));
+  color: var(--white);
+  padding: 12px 16px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  position: fixed; /* ← Cambiar a fixed para que no empuje contenido */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  border-bottom: 2px solid var(--gold);
+  animation: subtleBlink 3s infinite;
+  backdrop-filter: blur(8px);
+}
+
+@keyframes subtleBlink {
+  0%, 85% { opacity: 1; }
+  86%, 100% { opacity: 0.95; }
+}
+
+@media(max-width:768px){
+  .testimonios-grid{
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .testimonio{
+    padding: 1.2rem;
+  }
+  
+  .mapa-container iframe{
+    height: 300px;
+  }
+  
+  #testimonios{
+    padding: 1rem;
+  }
+}
+
+  /* ─── Responsivo ─── */
+  @media (max-width: 1024px) {
+    .info-content {
+        max-width: 900px;
+        gap: 1.5rem;
+    }
+    
+    .info-box {
+        max-width: 450px;
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .info-section {
+        padding: 2rem 1rem;
+        justify-content: flex-start; /* ← Cambiar en móvil */
+    }
+    
+    .info-content {
+        flex-direction: column;
+        max-width: 100%;
+        width: 100%;
+        gap: 1.5rem;
+    }
+    
+    .info-box {
+        max-width: 100%;
+        margin-bottom: 0;
+    }
+    
+    .info-box p {
+        text-align: center; /* ← Centrar en móvil */
+    }
+}
+
+@media (max-width: 480px) {
+    .info-section {
+        padding: 1rem 0.5rem;
+    }
+    
+    .info-content {
+        gap: 1rem;
+    }
+    
+    .info-box {
+        padding: 1.5rem 1.25rem;
+    }
+}
+
+
+/* ========== OPTIMIZACIONES DE RENDIMIENTO ========= */
+.screen, .info-section, .centered-section {
+  contain: layout style paint; /* ← CSS Containment para mejor rendimiento */
+}
+
+/* Lazy loading para imágenes de fondo */
+.info-section::before,
+.centered-section::before {
+  content-visibility: auto; /* ← Renderizado eficiente */
+}
+
+/* Optimización de animaciones */
+@media (prefers-reduced-motion: no-preference) {
+  .whatsapp-btn {
+    animation: gentlePulse 3s infinite;
+  }
+  
+  .whatsapp-float {
+    animation: subtleBounce 3s infinite;
+  }
+}
+
+@keyframes gentlePulse {
+  0% { box-shadow: var(--box-shadow-heavy), 0 0 0 0 rgba(255, 215, 0, 0.7); }
+  70% { box-shadow: var(--box-shadow-heavy), 0 0 0 8px rgba(255, 215, 0, 0); }
+  100% { box-shadow: var(--box-shadow-heavy), 0 0 0 0 rgba(255, 215, 0, 0); }
+}
+
+@keyframes subtleBounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-8px); }
+  60% { transform: translateY(-4px); }
+}
+
+/* ========== UTILIDADES ========= */
+.cta-container {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.cta-text {
+  font-size: 1.1rem;
+  color: var(--gold);
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+/* Mejorar legibilidad */
+h1, h2, h3 {
+  margin: 0;
+  text-align: center;
+  text-rendering: optimizeLegibility; /* ← Mejor renderizado de texto */
+}
+
+/* Performance: usar transform en lugar de top/left para animaciones */
+.animate-smooth {
+  will-change: transform;
+  transform: translateZ(0); /* ← Activar aceleración por hardware */
+}

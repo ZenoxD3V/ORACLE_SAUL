@@ -1,0 +1,27 @@
+<script>
+  // Event tracking para Google Ads
+  function trackWhatsAppClick(source) {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'click', {
+        event_category: 'WhatsApp',
+        event_label: source,
+        value: 1
+      });
+    }
+    
+    // Facebook Pixel
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Contact', {
+        content_name: 'WhatsApp Contact',
+        content_category: source
+      });
+    }
+  }
+  
+  // Agregar tracking a todos los botones de WhatsApp
+  document.querySelectorAll('a[href*="whatsapp"]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      trackWhatsAppClick(this.textContent.trim().substring(0,20));
+    });
+  });
+</script>
