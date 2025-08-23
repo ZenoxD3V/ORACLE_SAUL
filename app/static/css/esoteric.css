@@ -279,7 +279,7 @@ body {
     /* CAMBIOS PARA RESPONSIVE PRUEBA */
     body {
       background-attachment: scroll;
-      background-size: cover; /* ← Mantener cobertura completa */
+      background-size: contain; /* ← Mantener cobertura completa */
       background-position: center top;
       background-repeat: no-repeat;
       
