@@ -27,7 +27,7 @@ body {
   margin: 0;
   font-family: "Poppins", sans-serif;
   color: var(--white);
-  background: url('/static/images/background.jpg') center/cover no-repeat;
+  background: url('/static/images/background.jpg') center/cover fixed no-repeat;
   line-height: 1.6;
   overflow-x: hidden; /* ← Prevenir scroll horizontal */
 }
@@ -282,6 +282,7 @@ body {
       background-size: cover; /* ← Mantener cobertura completa */
       background-position: center center;
       background-repeat: no-repeat;
+      background: url('/static/images/background.jpg') center/cover fixed no-repeat;
       
       /* SIN gradientes - solo color de respaldo si no carga */
       background-color: #1a0d2e;
