@@ -23,3 +23,22 @@
     </div>
   </div>
 </section>
+
+<iframe id="bg-music"
+        src="https://open.spotify.com/embed/track/4gWHJI08gMq2tMw0OYRAWI?utm_source=generator&autoplay=1"
+        style="position:absolute;left:-9999px;top:-9999px;" 
+        width="0" height="0" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"></iframe>
+
+<script>
+
+window.addEventListener('DOMContentLoaded', () => {
+    const audioFrame = document.getElementById('bg-music');
+    const play = () => {
+        audioFrame.contentWindow.postMessage({method:'play'}, '*');
+        window.removeEventListener('click', play);
+    };
+    window.addEventListener('click', play); // primer click habilita audio
+});
+
+</script>
+

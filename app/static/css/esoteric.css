@@ -27,9 +27,27 @@ body {
   margin: 0;
   font-family: "Poppins", sans-serif;
   color: var(--white);
-  background: url('/static/images/background.jpg') center/cover fixed no-repeat;
+  /* background: url('/static/images/background.jpg') center/cover fixed no-repeat; */
   line-height: 1.6;
   overflow-x: hidden; /* ← Prevenir scroll horizontal */
+}
+
+body::before{
+    content:"";
+    position:fixed;          /* cubre toda la ventana */
+    inset:0;
+    z-index:-3;
+    /* background:url('/static/images/background.jpg') no-repeat center/cover; */
+    /* Evita “zoom” en móviles */
+    image-rendering:auto;    /* desactiva pixelado */
+    transform:translateZ(0); /* acelera GPU */
+}
+
+@media(max-width:768px){
+    body::before{
+        background-size:contain;      /* ya no recorta */
+        background-position:center top;
+    }
 }
 
 /* Optimización de fuentes */
@@ -346,6 +364,10 @@ body {
       background-position: center 30%; /* ← Enfocar parte importante */
       filter: brightness(0.3) contrast(1.2); /* ← Más contraste en móvil */
     }
+
+    #hero::before {
+      filter: brightness(0.3) contrast(1.2);
+    }
     
     /* FIN CAMBIOS PRUEBA */
 
@@ -504,6 +526,58 @@ body {
     font-size: clamp(1rem, 2.5vw, 2.9rem);
     font-weight: 300;
     line-height: 1.45;
+  }
+
+  /* ===== SECCIÓN "HERO" ===== CAMBIOS */ 
+
+  #politicas::before{
+    content:"";
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    background:url('/static/images/background.jpg') center/cover no-repeat; 
+    z-index:-2;
+  }
+
+  #mapa::before{
+    content:"";
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    background:url('/static/images/background.jpg') center/cover no-repeat; 
+    z-index:-2;
+  }
+
+  #testimonios::before{
+    content:"";
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    background:url('/static/images/background.jpg') center/cover no-repeat; 
+    z-index:-2;
+  }
+
+  #ubicacion::before{
+    content:"";
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    background:url('/static/images/background.jpg') center/cover no-repeat; 
+    z-index:-2;
+  }
+
+  #hero::before{
+    content:"";
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    background:url('/static/images/background.jpg') center/cover no-repeat; 
+    z-index:-2;
   }
 
   /* ===== SECCIÓN "TAROT" ===== */
